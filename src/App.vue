@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue"
+import { ref, onMounted } from "vue"
 import { db } from "./composables/firebase";
 import { addItem, allItems } from "./composables/utils";
 import Swal from "sweetalert2";
@@ -15,10 +15,16 @@ import {
  getDocs	
 } from "firebase/firestore";
 
+type CartItemsType = {
+  id: string
+  status: string
+  cartItem: string
+  quantity: number
+}
 
 let item = ref("")
 
- const cartItems = ref([])
+ const cartItems = ref<CartItemsType[]>([])
 
  const insertToCart = async() => {
  	await addItem(item.value)
@@ -50,7 +56,7 @@ let item = ref("")
    <img
      src="./assets/images.jpeg"
      alt="shopping image"
-     class="w-full h-48 rounded object-fit object-center"
+     class="w-full h-48 md:h-76 rounded object-fit object-center"
    />
  </div>
   <div class="flex gap-4 max-w-md mt-4 p-4 shadow rounded-lg bg-slate-200">
