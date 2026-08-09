@@ -11,18 +11,20 @@ import {
    updateDoc
    
 } from "firebase/firestore";
+import Swal from "sweetalert2";
+
 
  const colRef = collection(db, "items")
 
  // get snapsho5s
 
- export const allItems = (cart) => {
+ export const allItems = (cart:any) => {
  
   	
        
       onSnapshot(colRef, (snapshot) => {
       
-       const items = []
+       const items:any = []
            
  	    	snapshot.forEach(item => {
  			 items.push({ ...item.data(), id: item.id })
@@ -35,14 +37,14 @@ import {
  }
 
 
-export const addItem = async(newItem) => {
+export const addItem = async(newItem:any) => {
 
   const newAddedItem = newItem.trim().toLowerCase()
 
   if(!newAddedItem) return;
   
 
-  const cart = []
+  const cart:any[] = []
   
   try {
  
@@ -72,7 +74,11 @@ export const addItem = async(newItem) => {
    	}
 
     } catch(err) {
-    	alert(err.message)
+		if(err instanceof Error) {
+			Swal.fire("error",err.message, "error")
+
+		}
+
     }
     	
     

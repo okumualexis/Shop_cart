@@ -8,7 +8,7 @@ import {
 	
 } from "firebase/firestore";
 
-export const editOrDelete = (id) => {
+export const editOrDelete = (id:string) => {
 	
 Swal.fire({
   title: 'Do you want to shop this item or remove from cart?',
@@ -52,12 +52,20 @@ Swal.fire({
             Swal.fire("Removed","Item successully removed from cart", "info");
             
          } catch(err) {
-         	Swal.fire("Error", err.message, "error")
+          if(err instanceof Error){
+            Swal.fire("Error", err.message, "error")
+
+          }
+          
+          Swal.fire("Error", "Unknown error occured", "error")
          }
      }
 
    } catch(err) {
-   	 Swal.fire("Error", err.message, "error")
+   	 if(err instanceof Error){
+        Swal.fire("Error", err.message, "error")
+
+      }
    }
 });
 

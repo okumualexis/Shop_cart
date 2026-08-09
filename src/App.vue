@@ -15,7 +15,7 @@ import {
  getDocs	
 } from "firebase/firestore";
 
-type CartItemsType = {
+export type CartItemsType = {
   id: string
   status: string
   cartItem: string
